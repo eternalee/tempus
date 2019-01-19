@@ -26,10 +26,8 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
-    "pg": "^7.8.0",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "sequelize": "^4.42.0"
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

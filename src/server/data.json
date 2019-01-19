@@ -1,0 +1,39 @@
+{
+  "patient": {
+    "001": [
+      {
+        "name": "Jane Doe",
+        "age": "45",
+        "email": "janedoe@test.com",
+        "address": "1 Apple Lane, Los Angeles, CA",
+        "phone": "123-456-7890"
+      },
+      {
+        "appointments": []
+      }
+    ],
+    "002": [
+      {
+        "name": "John Deer",
+        "age": "55",
+        "email": "johndeer@test.com",
+        "address": "2 Orange Lane, Los Angeles, CA",
+        "phone": "234-567-8901"
+      },
+      {
+        "appointments": [
+          {
+            "datetime": "2018-12-17T09:30:00",
+            "purpose": "abnormal gene mutation",
+            "doctor": "Dr. Charles Xavier"
+          },
+          {
+            "datetime": "2019-01-25T11:00:00",
+            "purpose": "follow up",
+            "doctor": "Dr. Charles Xavier"
+          }
+        ]
+      }
+    ]
+  }
+}
