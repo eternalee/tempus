@@ -15,15 +15,15 @@ app.use(cookieParser());
 
 app.listen(8080, () => console.log('Listening on port 8080'));
 
-app.post('/api/signin', Controller.authenticate, Controller.addCookieJWT)
+app.post('/api/signin', Controller.authenticate)
 
 app.get('/api/patientlist', DoctorController.getPatientList)
-app.get('/api/patient/:name', DoctorController.getPatient)
-app.get('/api/patient/:name/appointments', DoctorController.getPatientAppointments)
-app.post('/api/patient/:name/appointments', DoctorController.schedulePatientAppointment)
-app.get('/api/patient/:name/files', DoctorController.getPatientFiles)
-app.post('/api/patient/:name/files', DoctorController.uploadPatientFile)
-app.delete('/api/patient/:name/files', DoctorController.removePatientFile)
+// app.get('/api/patient/:name', DoctorController.getPatient)
+// app.get('/api/patient/:name/appointments', DoctorController.getPatientAppointments)
+// app.post('/api/patient/:name/appointments', DoctorController.schedulePatientAppointment)
+// app.get('/api/patient/:name/files', DoctorController.getPatientFiles)
+// app.post('/api/patient/:name/files', DoctorController.uploadPatientFile)
+// app.delete('/api/patient/:name/files', DoctorController.removePatientFile)
 
 app.get('/test', function (req, res) {
   res.send({ msg: "Routes are working" })
