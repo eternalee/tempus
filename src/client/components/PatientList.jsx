@@ -13,7 +13,7 @@ import FaceIcon from '@material-ui/icons/Face';
 
 const styles = theme => ({
   root: {
-    width: '80%',
+    width: '90%',
     backgroundColor: theme.palette.background.paper,
   },
 });
@@ -29,6 +29,7 @@ class PatientList extends Component {
       patientlist: []
     }
   }
+
   componentDidMount() {
     fetch('/api/patient')
       .then(response => response.json())
@@ -36,27 +37,35 @@ class PatientList extends Component {
         this.setState({ patientlist });
       })
       .catch(err => console.log(err))
-
   }
-  //   const { classes } = props;
+
   render() {
-    return (
-      <div className={classes.root}>
-        {/* <List component="nav"> */}
-        {
-          this.state.patientlist.map(patient =>
-            <Link to={`/patient/${patient.patient_id}`}>
-              <ListItemLink >
-                <ListItemIcon><FaceIcon /></ListItemIcon>
-                <ListItemText primary={patient.name} />
-              </ListItemLink>
-              <Divider />
-            </Link>
-          )
-        }
-        {/* </List> */}
-      </div>
-    )
+    const { classes } = this.props;
+
+    if (this.props.usertype === 'doctor') {
+      return (
+        <div className={classes.root}>
+          <h1>Patient List</h1>
+          <List component="nav">
+            {
+              this.state.patientlist.map((patient, i) =>
+                <Link to={`/patient/${patient.patient_id}`} key={i}>
+                  <ListItemLink >
+                    <ListItemIcon><FaceIcon /></ListItemIcon>
+                    <ListItemText primary={patient.name} />
+                  </ListItemLink>
+                  <Divider />
+                </Link>
+              )
+            }
+          </List>
+        </div >
+      )
+    } else {
+      return (
+        <h1>Permission Denied</h1>
+      )
+    }
   }
 }
 

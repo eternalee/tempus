@@ -23,8 +23,6 @@ export default class PatientRecord extends Component {
       .catch(err => console.log(err))
   }
 
-
-
   componentDidMount() {
     fetch(`/api/patient/${this.props.match.params.patient_id}`)
       .then(response => response.json())
@@ -81,53 +79,60 @@ export default class PatientRecord extends Component {
   }
 
   render() {
-    // console.log('*** PatientRecord rerendered', this.state)
-    return (
-      <div>
-
-        <PatientProfile
-          patient_id={this.state.patientprofile['patient_id']}
-          name={this.state.patientprofile['name']}
-          dob={this.state.patientprofile['dob']}
-          email={this.state.patientprofile['email']}
-          address={this.state.patientprofile['address']}
-          phone={this.state.patientprofile['phone']}
-        />
-
-        {this.state.appointments.map(appointment =>
-          <Appointment
-            key={appointment.appointment_id}
-            id={appointment.appointment_id}
-            appointment_id={appointment.appointment_id}
-            appointment_time={appointment.appointment_time}
-            purpose={appointment.purpose}
-            doctor={appointment.doctor}
-            handleAppointmentCancel={this.handleAppointmentCancel}
+    if (this.props.usertype === 'doctor' || this.props.patient_id === `${this.props.match.params.patient_id}`) {
+      return (
+        <div>
+          <h1>Patient Record {this.props.match.params.patient_id}</h1>
+          <PatientProfile
+            patient_id={this.state.patientprofile['patient_id']}
+            name={this.state.patientprofile['name']}
+            dob={this.state.patientprofile['dob']}
+            email={this.state.patientprofile['email']}
+            address={this.state.patientprofile['address']}
+            phone={this.state.patientprofile['phone']}
           />
-        )}
 
-        <div className='Wrapper'>
-          <h2>Schedule an Appointment</h2>
-          <form onSubmit={this.handleAppointmentSubmit}>
-            <div className='Top'>
-              <div className='Left'>
-                <div>Date/Time:</div>
-                <div>Purpose:</div>
-                <div>Doctor:</div>
+          {this.state.appointments.map(appointment =>
+            <Appointment
+              key={appointment.appointment_id}
+              id={appointment.appointment_id}
+              appointment_id={appointment.appointment_id}
+              appointment_time={appointment.appointment_time}
+              purpose={appointment.purpose}
+              doctor={appointment.doctor}
+              handleAppointmentCancel={this.handleAppointmentCancel}
+              usertype={this.props.usertype}
+            />
+          )}
+
+          <div className='Wrapper'>
+            <h2>Schedule an Appointment</h2>
+            <form onSubmit={this.handleAppointmentSubmit}>
+              <div className='Top'>
+                <div className='Left'>
+                  <div>Date/Time:</div>
+                  <div>Purpose:</div>
+                  <div>Doctor:</div>
+                </div>
+                <div className='Right'>
+                  <input type='text' name='new_appointment_time' value={this.state.new_appointment_time} onChange={this.handleChange} />
+                  <input type='text' name='new_purpose' value={this.state.new_purpose} onChange={this.handleChange} />
+                  <input type='text' name='new_doctor' value={this.state.new_doctor} onChange={this.handleChange} />
+                </div>
               </div>
-              <div className='Right'>
-                <input type='text' name='new_appointment_time' value={this.state.new_appointment_time} onChange={this.handleChange} />
-                <input type='text' name='new_purpose' value={this.state.new_purpose} onChange={this.handleChange} />
-                <input type='text' name='new_doctor' value={this.state.new_doctor} onChange={this.handleChange} />
+              <div className='Bottom'>
+                <button id='submit-button' value="Submit">submit</button>
               </div>
-            </div>
-            <div className='Bottom'>
-              <button id='submit-button' value="Submit">submit</button>
-            </div>
-          </form>
+            </form>
+          </div>
+
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>Permission denied</div>
+      )
+    }
   }
 
 } 
