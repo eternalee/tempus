@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import '../app.css';
 import Login from './Login.jsx';
-import NavBar from './NavBar.jsx';
-import PatientRecord from './PatientRecord.jsx';
-import SearchBox from './SearchBox.jsx';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'ravenblack',
-      password: 'password2',
+      username: 'magneto',
+      password: 'password1',
       usertype: '',
       loggedIn: false,
       patient_id: ''
@@ -24,7 +21,7 @@ export default class App extends Component {
   handleLogin = (e) => {
     e.preventDefault();
 
-    fetch('/api/signin', {
+    fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
@@ -56,18 +53,14 @@ export default class App extends Component {
       return (
         <div>
           <h1>Welcome Doctor</h1>
-          {/* <NavBar /> */}
-          {/* <SearchBox /> */}
           {/* <PatientList /> */}
-          <PatientRecord usertype={this.state.usertype} patient_id={this.state.patient_id} />
         </div>
       )
     } else {
       return (
         <div>
           <h1>Welcome Patient</h1>
-          {/* <NavBar /> */}
-          <PatientRecord usertype={this.state.usertype} patient_id={this.state.patient_id} />
+          {/* <PatientRecord usertype={this.state.usertype} patient_id={this.state.patient_id} /> */}
         </div>
       )
     }

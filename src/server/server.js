@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const Controller = require('./Controller');
+const LoginController = require('./LoginController');
 const AppointmentController = require('./AppointmentController');
 const PatientController = require('./PatientController');
 
@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.listen(8080, () => console.log('Listening on port 8080'));
 
-app.post('/api/signin', Controller.authenticate)
+app.post('/api/login', LoginController.authenticate)
 app.get('/api/appointment/:patient_id', AppointmentController.getPatientAppointments)
 app.post('/api/appointment', AppointmentController.schedulePatientAppointment)
 app.delete('/api/appointment', AppointmentController.cancelPatientAppointment)
