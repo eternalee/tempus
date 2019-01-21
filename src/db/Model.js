@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('postgres://eterna:@localhost:5432/tempusdb');
+const sequelize = new Sequelize('postgres://root:@localhost:5432/tempusdb');
 
 sequelize
   .authenticate()

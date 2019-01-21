@@ -4,6 +4,14 @@
 
 Doctors and patients can log into this app and schedule appointments, view patient data and upload files! 
 
+### Instructions:
+Open a new terminal window. 
+If you don't have pg-cli, install at https://www.pgcli.com/install. To check, run 'postgres -V'. 
+Enter the CLI using the command 'psql postgres'.
+Create a db called 'Tempusdb'.
+Run: psql -f tempus/migrations/migration.sql from your local directory to create the tables in the Tempusdb
+Run: psql -f tempus/seed/seed.sql to seed the database with dummy data
+
 ### Assumptions/Notes:
 ### Page Reloads
 Ideally this application would have role protection so that whenever the page is reloaded, the user's login and usertype (doctor vs patient) are preserved. Given more time, I'd use a HOC wrapper that does a network call check upon page refresh. I'd also implement cookies & JWT to invalidate sessions, as well as registration with bcrypt hashing for passwords. 
