@@ -10,10 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import FaceIcon from '@material-ui/icons/Face';
 
-
 const styles = theme => ({
   root: {
-    width: '90%',
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
 });
@@ -26,17 +25,43 @@ class PatientList extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      patientlist: []
+      patientList: [],
+      filteredList: []
     }
   }
 
   componentDidMount() {
     fetch('/api/patient')
       .then(response => response.json())
-      .then(patientlist => {
-        this.setState({ patientlist });
+      .then(patientList => {
+        this.setState({
+          patientList: patientList,
+          filteredList: patientList
+        });
       })
       .catch(err => console.log(err))
+  }
+
+  handleFilter = (e) => {
+    e.preventDefault();
+    let currentList = [];
+    let newList = [];
+
+    // If the search bar isn't empty, filter the patient list with the searchterm
+    if (e.target.value !== "") {
+      const searchterm = e.target.value.toLowerCase();
+      currentList = this.state.patientList;
+
+      for (let obj of currentList) {
+        if (obj['name'].toLowerCase().includes(searchterm)) newList.push(obj)
+      }
+    } else {
+      // If the search bar is empty, set newList to original patient list
+      newList = this.state.patientList;
+    }
+    this.setState({
+      filteredList: newList
+    });
   }
 
   render() {
@@ -44,22 +69,25 @@ class PatientList extends Component {
 
     if (this.props.usertype === 'doctor') {
       return (
-        <div className={classes.root}>
-          <h1>Patient List</h1>
-          <List component="nav">
-            {
-              this.state.patientlist.map((patient, i) =>
-                <Link to={`/patient/${patient.patient_id}`} key={i}>
-                  <ListItemLink >
-                    <ListItemIcon><FaceIcon /></ListItemIcon>
-                    <ListItemText primary={patient.name} />
-                  </ListItemLink>
-                  <Divider />
-                </Link>
-              )
-            }
-          </List>
-        </div >
+        <div>
+          <input type="text" id="SearchBox" onChange={this.handleFilter} placeholder="Search..." />
+          <div className={classes.root}>
+            <h1>Patient List</h1>
+            <List component="nav">
+              {
+                this.state.filteredList.map((patient, i) =>
+                  <Link to={`/patient/${patient.patient_id}`} key={i}>
+                    <ListItemLink >
+                      <ListItemIcon><FaceIcon /></ListItemIcon>
+                      <ListItemText primary={patient.name} />
+                    </ListItemLink>
+                    <Divider />
+                  </Link>
+                )
+              }
+            </List>
+          </div >
+        </div>
       )
     } else {
       return (
