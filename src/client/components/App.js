@@ -9,10 +9,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'ravenblack',
+      password: 'password2',
       usertype: '',
-      loggedIn: false
+      loggedIn: false,
+      patient_id: ''
     }
   }
 
@@ -33,17 +34,21 @@ export default class App extends Component {
     })
       .then((res) => res.json())
       .then((res) => {
-        res.msg === 'Authenticated' ? this.setState({ loggedIn: true, usertype: res.usertype }) : alert('Invalid credentials');
-        setUsername(''); setPassword('');
+        res.msg === 'Authenticated' ?
+          this.setState({
+            loggedIn: true,
+            usertype: res.usertype,
+            patient_id: res.patient_id
+          }) : alert('Invalid credentials');
       });
   }
 
   render() {
-    console.log('***RERENDER', this.state)
+    console.log('***APP RENDERED', this.state)
     if (!this.state.loggedIn) {
       return (
         <div>
-          {JSON.stringify(this.state.loggedIn)}
+          <h1>Login</h1>
           <Login handleLogin={this.handleLogin} handleChange={this.handleChange} username={this.state.username} password={this.state.password} />
         </div>
       );
@@ -51,17 +56,18 @@ export default class App extends Component {
       return (
         <div>
           <h1>Welcome Doctor</h1>
-          {/* <NavBar />
-          <SearchBox />
-          <PatientList /> */}
+          {/* <NavBar /> */}
+          {/* <SearchBox /> */}
+          {/* <PatientList /> */}
+          <PatientRecord usertype={this.state.usertype} patient_id={this.state.patient_id} />
         </div>
       )
     } else {
       return (
         <div>
           <h1>Welcome Patient</h1>
-          {/* <NavBar />
-          <PatientRecord usertype={this.state.usertype} /> */}
+          {/* <NavBar /> */}
+          <PatientRecord usertype={this.state.usertype} patient_id={this.state.patient_id} />
         </div>
       )
     }

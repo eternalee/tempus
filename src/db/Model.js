@@ -74,6 +74,9 @@ module.exports = {
     patient_id: {
       type: Sequelize.UUID
     },
+    patient_name: {
+      type: Sequelize.STRING
+    },
     appointment_time: {
       type: Sequelize.DATE
     },

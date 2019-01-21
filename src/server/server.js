@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const Controller = require('./Controller');
-const DoctorController = require('./DoctorController');
+const AppointmentController = require('./AppointmentController');
 const PatientController = require('./PatientController');
 
 const app = express();
@@ -16,17 +16,15 @@ app.use(cookieParser());
 app.listen(8080, () => console.log('Listening on port 8080'));
 
 app.post('/api/signin', Controller.authenticate)
+app.get('/api/appointment/:patient_id', AppointmentController.getPatientAppointments)
+app.post('/api/appointment', AppointmentController.schedulePatientAppointment)
+app.delete('/api/appointment', AppointmentController.cancelPatientAppointment)
 
-app.get('/api/patientlist', DoctorController.getPatientList)
-// app.get('/api/patient/:name', DoctorController.getPatient)
-// app.get('/api/patient/:name/appointments', DoctorController.getPatientAppointments)
-// app.post('/api/patient/:name/appointments', DoctorController.schedulePatientAppointment)
-// app.get('/api/patient/:name/files', DoctorController.getPatientFiles)
-// app.post('/api/patient/:name/files', DoctorController.uploadPatientFile)
-// app.delete('/api/patient/:name/files', DoctorController.removePatientFile)
+// app.get('/api/patient', PatientController.getPatientList)
+app.get('/api/patient/:patient_id', PatientController.getPatientProfile)
 
-app.get('/test', function (req, res) {
-  res.send({ msg: "Routes are working" })
-})
+// app.get('/api/patient/:id/files', PatientController.getPatientFiles)
+// app.post('/api/patient/:id/files', PatientController.uploadPatientFile)
+// app.delete('/api/patient/:id/files', PatientController.removePatientFile)
 
 //app.use(express.static('../../')); 

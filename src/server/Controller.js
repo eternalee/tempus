@@ -20,7 +20,11 @@ module.exports = {
       } else {
         if (response['dataValues']['password'] === req.body.password) {
           console.log('authenticated');
-          res.header(200).send({ msg: 'Authenticated', usertype: response['dataValues']['usertype'] })
+          res.header(200).send({
+            msg: 'Authenticated',
+            usertype: response['dataValues']['usertype'],
+            patient_id: response['dataValues']['patient_id']
+          })
         } else {
           console.log('wrong username/password')
           res.header(400).send({ msg: 'Invalid credentials' })
