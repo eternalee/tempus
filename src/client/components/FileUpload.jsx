@@ -47,8 +47,8 @@ export default class FileUpload extends Component {
 
   render() {
     let s3 = new AWS.S3({
-      accessKeyId: "AKIAIZ6TAHCVEHB5I2EA",
-      secretAccessKey: "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",
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_ACCESS_SECRET,
       region: "us-east-2"
     });
     return (
