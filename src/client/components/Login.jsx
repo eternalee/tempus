@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import '../app.css';
 
-export default class App extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +27,7 @@ export default class App extends Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.msg === 'Authenticated') {
+          this.props.setUsertypePatientId(res.usertype, res.patient_id);
           res.usertype === 'doctor' ?
             this.props.history.push('/patientlist')
             : this.props.history.push(`/patient/${res.patient_id}`)
@@ -38,8 +38,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('***Login RENDERED', this.state)
-
     return (
       <div id='Login'>
         <h1>Login</h1>
