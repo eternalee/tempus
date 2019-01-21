@@ -102,8 +102,8 @@ export default class PatientRecord extends Component {
   render() {
     if (this.props.usertype === 'doctor' || this.props.patient_id === `${this.props.match.params.patient_id}`) {
       return (
-        <div>
-          <h1>Patient Record {this.props.match.params.patient_id}</h1>
+        <div id='PatientRecord'>
+          <h1>Patient Record</h1>
           <PatientProfile
             patient_id={this.state.patientprofile['patient_id']}
             name={this.state.patientprofile['name']}
@@ -131,14 +131,14 @@ export default class PatientRecord extends Component {
             />
           )}
 
-          <div className='Wrapper'>
+          <div className='ScheduleAppointment'>
             <h2>Schedule an Appointment</h2>
             <form onSubmit={this.handleAppointmentSubmit}>
               <div className='Top'>
                 <div className='Left'>
-                  <div>Date/Time:</div>
-                  <div>Purpose:</div>
-                  <div>Doctor:</div>
+                  <div className='ScheduleAppointmentField'>Date/Time:</div>
+                  <div className='ScheduleAppointmentField'>Purpose:</div>
+                  <div className='ScheduleAppointmentField'>Doctor:</div>
                 </div>
                 <div className='Right'>
                   <input type='datetime-local' name='new_appointment_time' value={this.state.new_appointment_time} onChange={this.handleChange} />

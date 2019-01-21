@@ -17,12 +17,12 @@ const PatientProfile = ({ name, patient_id, dob, email, address, phone }) => {
 
   return (
     <div className='PatientProfile' >
-      <p>Name: {name}</p>
-      <p>Id: {patient_id}</p>
-      <p>Age: {calculateAge(dob)}</p>
-      <p>Email: {email}</p>
-      <p>Address: {address}</p>
-      <p>Phone: {phone}</p>
+      <p>Name:<strong> {name}</strong></p>
+      <p>ID:<strong> {patient_id}</strong></p>
+      <p>Age:<strong> {calculateAge(dob)}</strong></p>
+      <p>Email:<strong> {email}</strong></p>
+      <p>Address:<strong> {address}</strong></p>
+      <p>Phone:<strong> {phone}</strong></p>
     </div >
   )
 };

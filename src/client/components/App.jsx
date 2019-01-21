@@ -26,7 +26,7 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div id='App'>
           <Switch>
             <Route exact path='/' render={(props) => <Login {...props} usertype={this.state.usertype} setUsertypePatientId={this.setUsertypePatientId} />} />
             <Route path='/patientlist' render={(props) => <PatientList {...props} usertype={this.state.usertype} />} />

@@ -69,10 +69,12 @@ class PatientList extends Component {
 
     if (this.props.usertype === 'doctor') {
       return (
-        <div>
-          <input type="text" id="SearchBox" onChange={this.handleFilter} placeholder="Search..." />
-          <div className={classes.root}>
+        <div className={classes.root}>
+          <div id='PatientList'>
             <h1>Patient List</h1>
+            <div id='SearchBoxWrapper'>
+              <input type="text" id="SearchBox" onChange={this.handleFilter} placeholder="Search..." />
+            </div>
             <List component="nav">
               {
                 this.state.filteredList.map((patient, i) =>
