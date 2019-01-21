@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PatientProfile = ({ patient_id, name, dob, email, address, phone }) => {
+const PatientProfile = ({ name, patient_id, dob, email, address, phone }) => {
 
   return (
     <div className='PatientProfile' >
