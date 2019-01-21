@@ -20,7 +20,7 @@ app.get('/api/appointment/:patient_id', AppointmentController.getPatientAppointm
 app.post('/api/appointment', AppointmentController.schedulePatientAppointment)
 app.delete('/api/appointment', AppointmentController.cancelPatientAppointment)
 
-// app.get('/api/patient', PatientController.getPatientList)
+app.get('/api/patient', PatientController.getPatientList)
 app.get('/api/patient/:patient_id', PatientController.getPatientProfile)
 
 // app.get('/api/patient/:id/files', PatientController.getPatientFiles)

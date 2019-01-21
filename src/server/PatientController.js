@@ -9,5 +9,12 @@ module.exports = {
         res.send(response);
       })
       .catch((error) => console.log(error))
+  },
+  getPatientList(req, res) {
+    Patients.findAll({})
+      .then(response => {
+        res.send(response);
+      })
+      .catch((error) => console.log(error))
   }
 }
