@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: 'Avenir';
+}
+
+.PatientProfile {
+  background-color: #C0C0C0;
+  margin: 10px;
+}
+.Appointment{
+  background-color: yellow;
+  margin: 10px;
+}
+.Wrapper{
+  background-color: orange;
+  margin: 10px;
+}
+.Top{
+  display: flex;
+  flex-direction: row;
+}
+.Right{
+  display: flex;
+  flex-direction: column;
+}
