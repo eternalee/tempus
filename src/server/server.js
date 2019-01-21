@@ -19,6 +19,7 @@ app.post('/api/login', LoginController.authenticate)
 app.get('/api/appointment/:patient_id', AppointmentController.getPatientAppointments)
 app.post('/api/appointment', AppointmentController.schedulePatientAppointment)
 app.delete('/api/appointment', AppointmentController.cancelPatientAppointment)
+app.patch('/api/appointment', AppointmentController.declinePatientAppointment)
 
 app.get('/api/patient', PatientController.getPatientList)
 app.get('/api/patient/:patient_id', PatientController.getPatientProfile)

@@ -48,7 +48,8 @@ export default class PatientRecord extends Component {
         'patient_name': this.state.patientprofile['name'],
         'appointment_time': this.state.new_appointment_time,
         'purpose': this.state.new_purpose,
-        'doctor': this.state.new_doctor
+        'doctor': this.state.new_doctor,
+        'status': 'PENDING'
       })
     })
       .then((res) => res.json())
@@ -70,6 +71,25 @@ export default class PatientRecord extends Component {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
         'appointment_id': appointment_id
+      })
+    })
+      .then(() => {
+        this.getAppointments();
+      })
+      .catch(err => console.log(err))
+  }
+
+  handleAppointmentDecline = (appointment_id) => {
+    let explanation;
+    if (this.props.usertype === 'doctor') {
+      explanation = prompt("Why is this appointment declined?", "");
+    }
+    fetch('/api/appointment', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        'appointment_id': appointment_id,
+        'declined_reason': explanation
       })
     })
       .then(() => {
@@ -100,7 +120,10 @@ export default class PatientRecord extends Component {
               appointment_time={appointment.appointment_time}
               purpose={appointment.purpose}
               doctor={appointment.doctor}
+              status={appointment.status}
+              declined_reason={appointment.declined_reason}
               handleAppointmentCancel={this.handleAppointmentCancel}
+              handleAppointmentDecline={this.handleAppointmentDecline}
               usertype={this.props.usertype}
             />
           )}
@@ -115,7 +138,7 @@ export default class PatientRecord extends Component {
                   <div>Doctor:</div>
                 </div>
                 <div className='Right'>
-                  <input type='text' name='new_appointment_time' value={this.state.new_appointment_time} onChange={this.handleChange} />
+                  <input type='datetime-local' name='new_appointment_time' value={this.state.new_appointment_time} onChange={this.handleChange} />
                   <input type='text' name='new_purpose' value={this.state.new_purpose} onChange={this.handleChange} />
                   <input type='text' name='new_doctor' value={this.state.new_doctor} onChange={this.handleChange} />
                 </div>

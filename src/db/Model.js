@@ -86,6 +86,12 @@ module.exports = {
     doctor: {
       type: Sequelize.STRING
     },
+    status: {
+      type: Sequelize.STRING
+    },
+    declined_reason: {
+      type: Sequelize.STRING
+    },
     created_at: {
       type: Sequelize.DATE
     }
