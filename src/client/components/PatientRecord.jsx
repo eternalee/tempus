@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Appointment from './Appointment.jsx';
 import PatientProfile from './PatientProfile.jsx';
 
-class PatientRecord extends React.Component {
+export default class PatientRecord extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -12,27 +12,24 @@ class PatientRecord extends React.Component {
       new_purpose: '',
       new_doctor: ''
     };
+    console.log('********** this.props', this.props)
   }
 
   componentDidMount() {
-    fetch(`/api/patient/${this.props.patient_id}`)
+    fetch(`/api/patient/${this.props.match.params.patient_id}`)
       .then(response => response.json())
       .then(patientprofile => {
         this.setState({ patientprofile });
       })
       .catch(err => console.log(err))
 
-    fetch(`/api/appointment/${this.props.patient_id}`)
+    fetch(`/api/appointment/${this.props.match.params.patient_id}`)
       .then(response => response.json())
       .then(appointments => {
-        console.log('appointments:', appointments)
         this.setState({ appointments });
       })
       .catch(err => console.log(err))
-
-    console.log(this.state)
   }
-
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -43,7 +40,7 @@ class PatientRecord extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
-        'patient_id': this.props.patient_id,
+        'patient_id': this.props.match.params.patient_id,
         'patient_name': this.state.patientprofile['name'],
         'appointment_time': this.state.new_appointment_time,
         'purpose': this.state.new_purpose,
@@ -74,11 +71,11 @@ class PatientRecord extends React.Component {
   }
 
   render() {
-    console.log('*** PatientRecord rerendered')
+    console.log('*** PatientRecord rerendered', this.state)
     return (
       <div>
         <div>
-          <h1>{this.props.usertype} {this.props.patient_id}</h1>
+          <h1>Patient Record</h1>
           <PatientProfile
             patient_id={this.state.patientprofile['patient_id']}
             name={this.state.patientprofile['name']}
@@ -125,4 +122,4 @@ class PatientRecord extends React.Component {
     )
   }
 
-} export default PatientRecord;
+} 
