@@ -12,8 +12,18 @@ export default class PatientRecord extends Component {
       new_purpose: '',
       new_doctor: ''
     };
-    console.log('********** this.props', this.props)
   }
+
+  getAppointments = () => {
+    fetch(`/api/appointment/${this.props.match.params.patient_id}`)
+      .then(response => response.json())
+      .then(appointments => {
+        this.setState({ appointments });
+      })
+      .catch(err => console.log(err))
+  }
+
+
 
   componentDidMount() {
     fetch(`/api/patient/${this.props.match.params.patient_id}`)
@@ -23,12 +33,7 @@ export default class PatientRecord extends Component {
       })
       .catch(err => console.log(err))
 
-    fetch(`/api/appointment/${this.props.match.params.patient_id}`)
-      .then(response => response.json())
-      .then(appointments => {
-        this.setState({ appointments });
-      })
-      .catch(err => console.log(err))
+    this.getAppointments();
   }
 
   handleChange = (e) => {
@@ -36,6 +41,7 @@ export default class PatientRecord extends Component {
   }
 
   handleAppointmentSubmit = (e) => {
+    e.preventDefault();
     fetch('/api/appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -53,9 +59,11 @@ export default class PatientRecord extends Component {
           new_appointment_time: '',
           new_purpose: '',
           new_doctor: ''
-        });
-      });
-    e.preventDefault();
+        })
+      })
+      .then(() => {
+        this.getAppointments();
+      })
   }
 
   handleAppointmentCancel = (appointment_id) => {
@@ -66,38 +74,38 @@ export default class PatientRecord extends Component {
         'appointment_id': appointment_id
       })
     })
-      .then(() => alert('successfully canceled appointment'))
+      .then(() => {
+        this.getAppointments();
+      })
       .catch(err => console.log(err))
   }
 
   render() {
-    console.log('*** PatientRecord rerendered', this.state)
+    // console.log('*** PatientRecord rerendered', this.state)
     return (
       <div>
-        <div>
-          <h1>Patient Record</h1>
-          <PatientProfile
-            patient_id={this.state.patientprofile['patient_id']}
-            name={this.state.patientprofile['name']}
-            dob={this.state.patientprofile['dob']}
-            email={this.state.patientprofile['email']}
-            address={this.state.patientprofile['address']}
-            phone={this.state.patientprofile['phone']}
+
+        <PatientProfile
+          patient_id={this.state.patientprofile['patient_id']}
+          name={this.state.patientprofile['name']}
+          dob={this.state.patientprofile['dob']}
+          email={this.state.patientprofile['email']}
+          address={this.state.patientprofile['address']}
+          phone={this.state.patientprofile['phone']}
+        />
+
+        {this.state.appointments.map(appointment =>
+          <Appointment
+            key={appointment.appointment_id}
+            id={appointment.appointment_id}
+            appointment_id={appointment.appointment_id}
+            appointment_time={appointment.appointment_time}
+            purpose={appointment.purpose}
+            doctor={appointment.doctor}
+            handleAppointmentCancel={this.handleAppointmentCancel}
           />
-        </div>
-        <div>
-          {this.state.appointments.map(appointment =>
-            <Appointment
-              key={appointment.appointment_id}
-              id={appointment.appointment_id}
-              appointment_id={appointment.appointment_id}
-              appointment_time={appointment.appointment_time}
-              purpose={appointment.purpose}
-              doctor={appointment.doctor}
-              handleAppointmentCancel={this.handleAppointmentCancel}
-            />
-          )}
-        </div>
+        )}
+
         <div className='Wrapper'>
           <h2>Schedule an Appointment</h2>
           <form onSubmit={this.handleAppointmentSubmit}>
