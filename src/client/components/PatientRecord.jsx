@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Appointment from './Appointment.jsx';
 import PatientProfile from './PatientProfile.jsx';
+import FileUpload from './FileUpload.jsx';
 
 export default class PatientRecord extends Component {
   constructor(props, context) {
@@ -111,6 +112,8 @@ export default class PatientRecord extends Component {
             address={this.state.patientprofile['address']}
             phone={this.state.patientprofile['phone']}
           />
+
+          <FileUpload />
 
           {this.state.appointments.map(appointment =>
             <Appointment

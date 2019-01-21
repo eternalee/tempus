@@ -25,13 +25,16 @@
   "dependencies": {
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
+    "aws-sdk": "^2.391.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
+    "filepond": "^3.7.6",
     "pg": "^7.8.0",
     "prop-types": "^15.6.2",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
+    "react-filepond": "^5.0.0",
     "react-router-dom": "^4.3.1",
     "sequelize": "^4.42.0"
   },
