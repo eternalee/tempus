@@ -10,7 +10,7 @@ Start Postgres using the command `pg_ctl -D /usr/local/var/postgres start && bre
 
 ### Create the database tempusdb 
 Using the CLI, run `psql postgres` to enter the postgres server and run `CREATE DATABASE tempusdb;`. 
-Update any values in config.js (e.g. username, password) as necessary.
+Update any values in src/db/config.js (e.g. username, password) as necessary.
 
 ### Seed the database
 Run `\q` or enter a new terminal window and cd into the root directory of this project.
