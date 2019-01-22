@@ -3,10 +3,11 @@
 Doctors and patients can log in to view patient data, schedule/cancel/decline appointments, and upload files! 
 
 ## First time? Instructions:
-### Start Postgres
+### Install and run Postgres
 Open a new terminal window. Check if you have postgres by running `postgres -V`.
 If you don't have postgres, run `brew install postgresql`.
 Start Postgres using the command `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`.
+Then run `createdb` if you don't have a table setup in your username.
 
 ### Create the database tempusdb 
 Using the CLI, run `psql postgres` to enter the postgres server and run `CREATE DATABASE tempusdb;`. 
