@@ -7,6 +7,7 @@ Doctors and patients can log in to view patient data, schedule/cancel/decline ap
 Open a new terminal window. Check if you have postgres by running `postgres -V`.
 If you don't have postgres, run `brew install postgresql`.
 Start Postgres using the command `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`.
+Then run `createdb` if you don't have a db setup under your username.
 Note: Update any values in the src/db/config.js file (e.g. username, password) as necessary. If necessary, run `psql postgres` in the CLI to enter the postgres server.
 
 ### Seed the database
