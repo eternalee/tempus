@@ -1,27 +1,23 @@
-# tempus
+# Tempus Code Challenge: Doctors and Patients in React & Node.js
 
-## Tempus Code Challenge: Doctors and Patients in React & Node.js
+Doctors and patients can log in to view patient data, schedule/cancel/decline appointments, and upload files! 
 
-Doctors and patients can log into this app and schedule appointments, view patient data and upload files! 
+## Instructions for Seeding db:
+### Start Postgres
+Open a new terminal window. Check if you have postgres by running `postgres -V`.
+If you don't have postgres, run `brew install postgresql`.
+Start Postgres using the command `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`.
 
-### Instructions for Seeding db:
-## Start Postgres
-Open a new terminal window
-If you don't have postgres, run 'brew install postgresql'
-Start Postgres using the command 'pg_ctl -D /usr/local/var/postgres start && brew services start postgresql'
-To check, run 'postgres -V'
+### Create the database tempusdb 
+Using the CLI, run `psql postgres` to enter the postgres server and run `CREATE DATABASE tempusdb;`. 
+Update any values in config.js (e.g. username, password) as necessary.
 
-## Create the database tempusdb on your local computer
-Enter the CLI using the command 'psql postgres' and run 'CREATE DATABASE tempusdb'. Can also run 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"' at this time to enable uuid creation.
+### Seed the database
+Run `\q` or enter a new terminal window and cd into the root directory of this project.
+Run: `psql -f src/db/migration.sql` from your local directory to create the tables in the tempusdb.
+Run: `psql -f src/db/seed.sql` to seed the database with dummy data.
 
-Note: config.js assumes username is 'root'.
-
-## Seed the database
-In terminal, cd into the root directory of the project.
-Run: psql -f src/db/migration.sql from your local directory to create the tables in the Tempusdb
-Run: psql -f src/db/seed.sql to seed the database with dummy data
-
-### Assumptions/Notes:
+## Assumptions/Notes:
 ### Page Reloads
 Ideally this application would have role protection so that whenever the page is reloaded, the user's login and usertype (doctor vs patient) are preserved. Given more time, I'd use a HOC wrapper that does a network call check upon page refresh. I'd also implement cookies & JWT to invalidate sessions, as well as registration with bcrypt hashing for passwords. 
 
