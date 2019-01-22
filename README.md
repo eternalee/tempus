@@ -2,7 +2,7 @@
 
 Doctors and patients can log in to view patient data, schedule/cancel/decline appointments, and upload files! 
 
-## Instructions for Seeding db:
+## First time? Instructions:
 ### Start Postgres
 Open a new terminal window. Check if you have postgres by running `postgres -V`.
 If you don't have postgres, run `brew install postgresql`.
@@ -16,6 +16,9 @@ Update any values in src/db/config.js (e.g. username, password) as necessary.
 Run `\q` or enter a new terminal window and cd into the root directory of this project.
 Run: `psql -f src/db/migration.sql` from your local directory to create the tables in the tempusdb.
 Run: `psql -f src/db/seed.sql` to seed the database with dummy data.
+
+### Start the app
+Run `npm start` or `npm run dev`.
 
 ## Assumptions/Notes:
 ### Page Reloads
