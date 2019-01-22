@@ -1,5 +1,6 @@
+const config = require('./config');
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('postgres://root:@localhost:5432/tempusdb');
+const sequelize = new Sequelize(`postgres://${config.DB_USERNAME}:@${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`);
 
 sequelize
   .authenticate()

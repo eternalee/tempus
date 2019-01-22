@@ -34,7 +34,7 @@ INSERT INTO logins VALUES(
  DEFAULT,
  'magneto',
  'password1',
- 'patient',
+ 'doctor',
   NULL,
   DEFAULT
 );
@@ -53,7 +53,16 @@ INSERT INTO logins VALUES(
  'ravenblack',
  'password2',
  'patient',
- '0BAADC90-1C8A-11E9-8EA3-88E9FE787C26',
+ 'C2505744-1C95-11E9-BEB9-88E9FE787C26',
+  DEFAULT
+);
+
+INSERT INTO logins VALUES(
+ DEFAULT,
+ 'xavier',
+ 'password4',
+ 'doctor',
+  NULL,
   DEFAULT
 );
 

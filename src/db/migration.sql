@@ -1,5 +1,8 @@
 \c tempusdb;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SELECT uuid_generate_v1();
+
 DROP TABLE IF EXISTS patients;
 DROP TABLE IF EXISTS logins;
 DROP TABLE IF EXISTS appointments;
@@ -13,7 +16,7 @@ CREATE TABLE patients (
   phone VARCHAR (255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
- CREATE TABLE logins (
+CREATE TABLE logins (
   login_id uuid DEFAULT uuid_generate_v1 () PRIMARY KEY,
   username VARCHAR (255) NOT NULL UNIQUE,
   password VARCHAR (255) NOT NULL,
@@ -21,7 +24,7 @@ CREATE TABLE patients (
   patient_id uuid REFERENCES patients(patient_id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
- CREATE TABLE appointments (
+CREATE TABLE appointments (
   appointment_id uuid DEFAULT uuid_generate_v1 () PRIMARY KEY,
   patient_id uuid REFERENCES patients(patient_id),
   patient_name VARCHAR (255),

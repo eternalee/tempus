@@ -4,13 +4,22 @@
 
 Doctors and patients can log into this app and schedule appointments, view patient data and upload files! 
 
-### Instructions:
-Open a new terminal window. 
-If you don't have pg-cli, install at https://www.pgcli.com/install. To check, run 'postgres -V'. 
-Enter the CLI using the command 'psql postgres'.
-Create a db called 'Tempusdb'.
-Run: psql -f tempus/migrations/migration.sql from your local directory to create the tables in the Tempusdb
-Run: psql -f tempus/seed/seed.sql to seed the database with dummy data
+### Instructions for Seeding db:
+## Start Postgres
+Open a new terminal window
+If you don't have postgres, run 'brew install postgresql'
+Start Postgres using the command 'pg_ctl -D /usr/local/var/postgres start && brew services start postgresql'
+To check, run 'postgres -V'
+
+## Create the database tempusdb on your local computer
+Enter the CLI using the command 'psql postgres' and run 'CREATE DATABASE tempusdb'. Can also run 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"' at this time to enable uuid creation.
+
+Note: config.js assumes username is 'root'.
+
+## Seed the database
+In terminal, cd into the root directory of the project.
+Run: psql -f src/db/migration.sql from your local directory to create the tables in the Tempusdb
+Run: psql -f src/db/seed.sql to seed the database with dummy data
 
 ### Assumptions/Notes:
 ### Page Reloads
